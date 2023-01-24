@@ -1,0 +1,28 @@
+{% extends 'layout.html' %} {% block title %} Share your facts {% endblock %} {%
+block body %}
+<div class="container mt-5">
+  <h1>Share your fact about Vasyl</h1>
+
+  <form method="post">
+    <input
+      type="text"
+      name="title"
+      class="form-control"
+      placeholder="Put a brief description of your fact"
+    /><br />
+    <textarea
+      name="text"
+      class="form-control"
+      placeholder="Write here the full story!"
+    ></textarea
+    ><br />
+    <input
+      type="text"
+      name="author"
+      class="form-control"
+      placeholder="Write your name here"
+    /><br />
+    <button type="submit" class="btn btn-success">Send</button>
+  </form>
+</div>
+{% endblock %}
