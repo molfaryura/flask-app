@@ -1,3 +1,19 @@
 .fs-4 {
   padding-left: 10px;
 }
+
+.btn:hover {
+  transform: scale(110%) rotate(-2deg);
+}
+
+.btn-info:hover {
+  transform: scale(90%) rotate(2deg);
+}
+
+.btn-info:hover {
+  transform: scale(90%) rotate(2deg);
+}
+
+.d-block:hover {
+  transform: scale(109%) rotate(4deg);
+}
