@@ -32,13 +32,13 @@ class Author(db.Model):
 def post_fact(template, page):
     if request.method == 'POST':
         title = request.form['title']
-        text = request.form['author']
+        text = request.form['text']
         author = request.form['author']
-                                                        
-        facts_data = Facts(title=title,
-                        text=text)
 
         author_data = Author(name=author)
+
+        facts_data = Facts(title=title,
+                        text=text, author=author_data)
 
         try:
             db.session.add_all([facts_data, author_data])
@@ -76,6 +76,13 @@ def post_shavk():
 @app.route('/post/vasyl', methods=['POST', 'GET'])
 def post_vasyl():
     return post_fact('post_vasyl.html','/vasyl')
+
+
+@app.route('/read')
+def read():
+    data = Facts.query.filter_by()
+    return render_template('read.html', data=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
