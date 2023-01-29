@@ -22,6 +22,7 @@ class Facts(db.Model):
     title = db.Column(db.String, nullable = False)
     text = db.Column(db.Text, nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
+    person = db.Column(db.String, nullable=False)
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -34,11 +35,12 @@ def post_fact(template, page):
         title = request.form['title']
         text = request.form['text']
         author = request.form['author']
+        person = request.form['person']
 
         author_data = Author(name=author)
 
         facts_data = Facts(title=title,
-                        text=text, author=author_data)
+                        text=text, author=author_data, person=person)
 
         try:
             db.session.add_all([facts_data, author_data])

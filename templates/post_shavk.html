@@ -9,11 +9,13 @@ block body %}
       name="title"
       class="form-control"
       placeholder="Put a brief title of your fact"
+      required="true"
     /><br />
     <textarea
       name="text"
       class="form-control"
       placeholder="Write here the full story!"
+      required="true"
     ></textarea
     ><br />
     <input
@@ -21,7 +23,18 @@ block body %}
       name="author"
       class="form-control"
       placeholder="Write your name here"
+      required="true"
     /><br />
+    <label for="person"
+      >Choose whether this applies only to Shavkoon or to Vasyl as well</label
+    >
+    <select class="form-control" name="person">
+      <option value="Shavkoon" placeholder="Hello">Shavkoon</option>
+      <br />
+      <option value="Both Shavkoon and Vasyl">
+        Both Shavkoon and Vasyl
+      </option></select
+    ><br />
     <button type="submit" class="btn btn-success">Send</button>
   </form>
 </div>

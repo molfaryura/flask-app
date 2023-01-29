@@ -2,8 +2,8 @@
   padding-left: 10px;
 }
 
-.btn:hover {
-  transform: scale(110%) rotate(-2deg);
+.btn-about:hover {
+  transform: scale(95%) rotate(2deg);
 }
 
 .btn-info:hover {
@@ -11,5 +11,10 @@
 }
 
 .d-block:hover {
+  transform: scale(109%) rotate(4deg);
+}
+
+.btn-primary:hover,
+.btn-outline-secondary:hover {
   transform: scale(109%) rotate(4deg);
 }
