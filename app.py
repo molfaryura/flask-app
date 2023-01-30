@@ -82,8 +82,7 @@ def post_vasyl():
 
 @app.route('/read')
 def read():
-    data = Facts.query.filter_by()
-    return render_template('read.html', data=data)
+    return render_template('read.html')
 
 
 if __name__ == '__main__':

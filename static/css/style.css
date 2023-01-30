@@ -18,3 +18,7 @@
 .btn-outline-secondary:hover {
   transform: scale(109%) rotate(4deg);
 }
+
+.btn-read:hover {
+  transform: scale(125%) rotate(-1deg);
+}
