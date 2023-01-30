@@ -84,6 +84,5 @@ def post_vasyl():
 def read():
     return render_template('read.html')
 
-
 if __name__ == '__main__':
     app.run(debug=True)
