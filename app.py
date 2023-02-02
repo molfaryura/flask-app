@@ -80,18 +80,22 @@ def post_vasyl():
     return post_fact('post_vasyl.html','/vasyl')
 
 
-# Need to finish this function in next commits.
+
 # The user selects a person about whom he wants to get facts
-# It shoud connect to the database and show all facts on the separate page
-# Will be great if implement dynamic url like this <string:person>
-# It is TOP priority task!
+# It connects to the database and show all facts on the separate html page
+# Probably will be changed in the future(add <string:person> to url)
 @app.route('/read', methods=['POST', 'GET'])
 def read():
     if request.method == 'GET':
         return render_template('read.html')
-    else:
-        if request.form.get("person") == 'shavk':
-            return render_template('result.html')
+    elif request.method == 'POST':
+        if request.form.get("person") != 'all':
+            person = request.form.get("person")
+            db_data = Facts.query.filter_by(person = person).all()
+            return render_template('result.html', db_data=db_data)
+        else:
+            db_data = Facts.query.all()
+            return render_template('result.html', db_data=db_data)
 
 
 if __name__ == '__main__':
