@@ -1,3 +1,11 @@
+'''
+WebApp on Flask and SQLAlchemy.
+In this app the user can store and get 
+data from the database about two
+people, who are widely known in
+narrow circles
+'''
+
 import os
 
 from flask import Flask, render_template, request, redirect
@@ -102,9 +110,17 @@ def read():
 
 @app.route('/read/<int:id>')
 def read_more(id):
-    # add docstring in the next commit
+    '''
+    Return html page where url contains
+    primary key for particular record 
+    in the database. On that html page
+    the user will see a full text of
+    a certain fact
+    '''
+
     db_data = Facts.query.filter_by(id=id).first()
     return render_template("read_more.html", db_data=db_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
