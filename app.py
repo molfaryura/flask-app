@@ -81,11 +81,13 @@ def post_vasyl():
 
 
 
-# The user selects a person about whom he wants to get facts
-# It connects to the database and show all facts on the separate html page
-# Probably will be changed in the future(add <string:person> to url)
 @app.route('/read', methods=['POST', 'GET'])
 def read():
+    '''
+    The user selects a person about whom he wants to get facts
+    It connects to the database and show all facts on the separate html page
+    '''
+
     if request.method == 'GET':
         return render_template('read.html')
     elif request.method == 'POST':
@@ -97,6 +99,12 @@ def read():
             db_data = Facts.query.all()
             return render_template('result.html', db_data=db_data)
 
+
+@app.route('/read/<int:id>')
+def read_more(id):
+    # add docstring in the next commit
+    db_data = Facts.query.filter_by(id=id).first()
+    return render_template("read_more.html", db_data=db_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
