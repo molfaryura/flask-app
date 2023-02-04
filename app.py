@@ -106,14 +106,13 @@ def read():
     if request.method == 'GET':
         return render_template('read.html')
     elif request.method == 'POST':
-        if request.form.get("person") != 'all':
+        if request.form.get("person") == 'All':
+            db_data = Facts.query.all()
+            return render_template('result.html', db_data=db_data)
+        else:
             person = request.form.get("person")
             db_data = Facts.query.filter_by(person = person).all()
             return render_template('result.html', db_data=db_data)
-        else:
-            db_data = Facts.query.all()
-            return render_template('result.html', db_data=db_data)
-
 
 @app.route('/read/<int:id>')
 def read_more(id):
