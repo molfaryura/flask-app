@@ -10,10 +10,6 @@
   transform: scale(90%) rotate(2deg);
 }
 
-.d-block:hover {
-  transform: scale(109%) rotate(4deg);
-}
-
 .btn-primary:hover,
 .btn-outline-secondary:hover {
   transform: scale(109%) rotate(4deg);

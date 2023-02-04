@@ -87,6 +87,10 @@ def post_shavk():
 def post_vasyl():
     return post_fact('post_vasyl.html','/vasyl')
 
+@app.route('/resource')
+def resource():
+    return render_template('resource.html')
+
 
 
 @app.route('/read', methods=['POST', 'GET'])
