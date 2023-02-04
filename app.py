@@ -91,6 +91,9 @@ def post_vasyl():
 def resource():
     return render_template('resource.html')
 
+@app.route('/team')
+def team():
+    return render_template('team.html')
 
 
 @app.route('/read', methods=['POST', 'GET'])
