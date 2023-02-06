@@ -8,8 +8,6 @@ narrow circles
 
 import os
 
-import smtplib
-
 from flask import Flask, render_template, request, redirect
 
 from flask_sqlalchemy import SQLAlchemy
@@ -101,9 +99,6 @@ def team():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
-    
-
-
 
 @app.route('/read', methods=['POST', 'GET'])
 def read():
