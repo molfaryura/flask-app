@@ -8,6 +8,8 @@ narrow circles
 
 import os
 
+import smtplib
+
 from flask import Flask, render_template, request, redirect
 
 from flask_sqlalchemy import SQLAlchemy
@@ -17,11 +19,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-password = os.environ.get('DB_password')
+db_password = os.environ.get('DB_password')
+gmail_password = os.environ.get('Gmail_password')
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{password}@localhost/my_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@localhost/my_db'
 
 db = SQLAlchemy(app)
 
@@ -94,6 +97,12 @@ def resource():
 @app.route('/team')
 def team():
     return render_template('team.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+    
+
 
 
 @app.route('/read', methods=['POST', 'GET'])
