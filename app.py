@@ -10,33 +10,36 @@ import os
 
 from flask import Flask, render_template, request, redirect
 
-from flask_sqlalchemy import SQLAlchemy
-
 from dotenv import load_dotenv
 
+from flask_login import login_required, current_user, login_user, logout_user
+
+from models import *
 
 load_dotenv()
 
 db_password = os.environ.get('DB_password')
-gmail_password = os.environ.get('Gmail_password')
 
 app = Flask(__name__)
 
+
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@localhost/my_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+app.secret_key = os.environ.get('Secret_key')
 
-class Facts(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable = False)
-    text = db.Column(db.Text, nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
-    person = db.Column(db.String, nullable=False)
+db.init_app(app)
 
-class Author(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(100), nullable = False)
-    fact = db.relationship('Facts', backref='author')
+login.init_app(app)
+login.login_view = 'login'
+
+
+first_answer = os.environ.get('First_answer')
+second_answer = os.environ.get('Second_answer')
+
+@app.before_first_request
+def create_table():
+    db.create_all()
 
 
 def post_fact(template, page):
@@ -64,29 +67,62 @@ def post_fact(template, page):
 def index():
     return render_template('index.html')
 
+@app.route('/login', methods = ['POST', 'GET'])
+def login():
+    if current_user.is_authenticated:
+        return redirect('/')
+     
+    if request.method == 'POST':
+        email = request.form['email']
+        user = UserModel.query.filter_by(email=email).first()
+        if user is not None and user.check_password(request.form['password']):
+            login_user(user)
+            return redirect('/')
+     
+    return render_template('login.html')
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if current_user.is_authenticated:
+        return redirect('/')
+     
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        question = request.form['question']
+
+ 
+        if UserModel.query.filter_by(email=email).all():
+            return ('A user with this email already exists')
+        
+        if question != first_answer or question != second_answer:
+            return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+        
+        user = UserModel(email=email, username=username)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/')
+    return render_template('register.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-@app.route('/shavkoon')
-def shavk():
-    return render_template('post_shavk.html')
-
-@app.route('/vasyl')
-def vasyl():
-    return render_template('post_vasyl.html')
 
 @app.route('/donate')
 def donate():
     return render_template('donate.html')
 
 @app.route('/post/shavkoon', methods=['POST', 'GET'])
+@login_required
 def post_shavk():
-    return post_fact('post_shavk.html', '/shavkoon')
+    return post_fact('post_shavk.html', '/post/shavkoon')
 
 @app.route('/post/vasyl', methods=['POST', 'GET'])
+@login_required
 def post_vasyl():
-    return post_fact('post_vasyl.html','/vasyl')
+    return post_fact('post_vasyl.html','/post/vasyl')
 
 @app.route('/resource')
 def resource():
@@ -130,6 +166,11 @@ def read_more(id):
 
     db_data = Facts.query.filter_by(id=id).first()
     return render_template("read_more.html", db_data=db_data)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 if __name__ == '__main__':
