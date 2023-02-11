@@ -139,8 +139,10 @@ def contact():
 @app.route('/read', methods=['POST', 'GET'])
 def read():
     '''
-    The user selects a person about whom he wants to get facts
-    It connects to the database and show all facts on the separate html page
+    The user selects a person about whom 
+    he wants to get facts.
+    It connects to the database and 
+    show all facts on the separate html page
     '''
 
     if request.method == 'GET':
@@ -168,7 +170,6 @@ def read_more(id):
     return render_template("read_more.html", db_data=db_data)
 
 @app.route('/logout')
-
 def logout():
     logout_user()
     return redirect('/')

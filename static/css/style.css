@@ -12,7 +12,18 @@ ul.contact:hover {
   transform: scale(115%);
 }
 
-.btn-about:hover {
+a.btn-success {
+  background: lightgreen;
+}
+a.btn-warning {
+  background: lightgoldenrodyellow;
+}
+a.btn-info {
+  background: lightblue;
+}
+.btn-about:hover,
+.btn-warning:hover,
+.btn-success:hover {
   transform: scale(95%) rotate(2deg);
 }
 

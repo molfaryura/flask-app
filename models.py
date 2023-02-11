@@ -1,3 +1,9 @@
+'''Database structure with two
+    tables for facts and user's
+    credentials with one to many
+    relationship
+'''
+
 from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash, check_password_hash
