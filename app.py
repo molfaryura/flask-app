@@ -168,6 +168,7 @@ def read_more(id):
     return render_template("read_more.html", db_data=db_data)
 
 @app.route('/logout')
+
 def logout():
     logout_user()
     return redirect('/')
