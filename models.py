@@ -14,22 +14,20 @@ class Facts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable = False)
     text = db.Column(db.Text, nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     person = db.Column(db.String, nullable=False)
 
-class Author(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(100), nullable = False)
-    fact = db.relationship('Facts', backref='author')
-
-# Create table for registration
 class UserModel(UserMixin, db.Model):
+    '''Create table for 
+       the registration
+    '''
     __tablename__ = 'users'
  
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True)
     username = db.Column(db.String(100))
     password_hash = db.Column(db.String())
+    fact = db.relationship('Facts', backref='author')
  
     def set_password(self,password):
         self.password_hash = generate_password_hash(password)

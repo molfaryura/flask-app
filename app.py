@@ -46,16 +46,16 @@ def post_fact(template, page):
     if request.method == 'POST':
         title = request.form['title']
         text = request.form['text']
-        author = request.form['author']
+        author = current_user
         person = request.form['person']
 
-        author_data = Author(name=author)
+
 
         facts_data = Facts(title=title,
-                        text=text, author=author_data, person=person)
+                        text=text, author=author, person=person)
 
         try:
-            db.session.add_all([facts_data, author_data])
+            db.session.add(facts_data)
             db.session.commit()
             redirect(page)
         except:
@@ -96,7 +96,7 @@ def register():
         if UserModel.query.filter_by(email=email).all():
             return ('A user with this email already exists')
         
-        if question != first_answer or question != second_answer:
+        if question != first_answer and question != second_answer:
             return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
         
         user = UserModel(email=email, username=username)
