@@ -21,7 +21,7 @@ a.btn-warning {
 a.btn-info {
   background: lightblue;
 }
-.btn-about:hover,
+
 .btn-warning:hover,
 .btn-success:hover {
   transform: scale(95%) rotate(2deg);
@@ -38,6 +38,10 @@ a.btn-info {
 
 .btn-read:hover {
   transform: scale(125%) rotate(-1deg);
+}
+
+.btn-about:hover {
+  transform: scale(90%) rotate(-2deg);
 }
 
 .gradient-custom {
