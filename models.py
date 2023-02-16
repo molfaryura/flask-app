@@ -30,9 +30,9 @@ class UserModel(UserMixin, db.Model):
     __tablename__ = 'users'
  
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(80), unique=True)
-    username = db.Column(db.String(100))
-    password_hash = db.Column(db.String())
+    email = db.Column(db.String(80), unique=True, nullable = False)
+    username = db.Column(db.String(100), nullable = False)
+    password_hash = db.Column(db.String(), nullable = False)
     fact = db.relationship('Facts', backref='author')
  
     def set_password(self,password):
