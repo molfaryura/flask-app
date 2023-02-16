@@ -2,6 +2,10 @@
   padding-left: 10px;
 }
 
+p.error {
+  text-align: center;
+  color: red;
+}
 ul {
   list-style-type: none;
   padding: 0;

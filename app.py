@@ -8,7 +8,7 @@ narrow circles
 
 import os
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 
 from dotenv import load_dotenv
 
@@ -94,7 +94,8 @@ def register():
 
  
         if UserModel.query.filter_by(email=email).all():
-            return ('A user with this email already exists')
+            flash('A user with this email already exists')
+            return redirect('/register')
         
         if question != first_answer and question != second_answer:
             return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')

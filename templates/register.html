@@ -38,6 +38,7 @@
                             name="username"
                             id="form3Example1c"
                             class="form-control"
+                            required="true"
                           />
                           <label class="form-label" for="form3Example1c"
                             >Your Name</label
@@ -53,6 +54,7 @@
                             name="email"
                             id="form3Example3c"
                             class="form-control"
+                            required="true"
                           />
                           <label class="form-label" for="form3Example3c"
                             >Your Email</label
@@ -68,6 +70,7 @@
                             name="password"
                             id="form3Example4c"
                             class="form-control"
+                            required="true"
                           />
                           <label class="form-label" for="form3Example4c"
                             >Password</label
@@ -83,6 +86,7 @@
                             name="question"
                             id="form3Example4cd"
                             class="form-control"
+                            required="true"
                           />
                           <label class="form-label" for="form3Example4cd"
                             >What metals increase the synthesis of secondary
@@ -90,6 +94,9 @@
                           >
                         </div>
                       </div>
+                      {% for message in get_flashed_messages() %}
+                      <p class="error">Error : {{ message }}</p>
+                      {% endfor %}
 
                       <div
                         class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
