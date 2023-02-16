@@ -52,6 +52,9 @@
                         >Password</label
                       >
                     </div>
+                    {% for message in get_flashed_messages() %}
+                    <p class="error">Error : {{ message }}</p>
+                    {% endfor %}
 
                     <button
                       type="submit"

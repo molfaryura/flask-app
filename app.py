@@ -78,6 +78,10 @@ def login():
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
             return redirect('/')
+        
+        else:
+            flash('Email or Password is incorrect!')
+            return redirect('/login')
      
     return render_template('login.html')
 
