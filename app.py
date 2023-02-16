@@ -90,11 +90,16 @@ def register():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
+        repeat_password = request.form['repeat_password']
         question = request.form['question']
 
  
         if UserModel.query.filter_by(email=email).all():
             flash('A user with this email already exists')
+            return redirect('/register')
+        
+        if password != repeat_password:
+            flash('Passwords must match')
             return redirect('/register')
         
         if question != first_answer and question != second_answer:
@@ -174,7 +179,6 @@ def read_more(id):
 def logout():
     logout_user()
     return redirect('/')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
