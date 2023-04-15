@@ -214,7 +214,7 @@ def read_more(page_id):
 def logout():
     """Handle GET requests for the '/logout' URL.
 
-    Returns:
+    returns:
         response: Redirects to the home page ('/') after logging out the user.
     """
     logout_user()

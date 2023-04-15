@@ -12,6 +12,10 @@ ul {
   margin: 0;
 }
 
+select.form-control[name="person"] {
+  margin-top: 10px;
+}
+
 ul.contact:hover {
   transform: scale(115%);
 }
