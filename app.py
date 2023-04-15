@@ -27,7 +27,7 @@ app.secret_key = os.environ.get('Secret_key')
 db.init_app(app)
 
 login.init_app(app)
-login.login_view = 'login'
+login.login_view = 'login_'
 
 
 first_answer = os.environ.get('First_answer')
@@ -76,13 +76,13 @@ def index():
     return render_template('index.html')
 
 @app.route('/login', methods = ['POST', 'GET'])
-def login():
+def login_():
     """ Handle user login.
 
     returns:
         redirect: If the user is already authenticated, redirect to the home page.
-        redirect: If the request method is POST and the email and password are correct, redirect to the home page.
-        redirect: If the email or password is incorrect, redirect back to the login page with an error flash message.
+        redirect: Home page if the request method is POST and the email and password are correct.
+        redirect: Login page with an error flash message if the email or password is incorrect.
         render_template: If the request method is not POST, render the login template.
     """
     if current_user.is_authenticated:
@@ -106,10 +106,10 @@ def register():
 
     returns:
         redirect: If the user is already authenticated, redirect to the home page.
-        redirect: If the request method is POST and the registration is successful, redirect to the home page.
-        redirect: If a user with the same email already exists, redirect back to the registration page with an error flash message.
-        redirect: If the passwords do not match, redirect back to the registration page with an error flash message.
-        redirect: If the security question answer is invalid, redirect to a YouTube link (for humorous purposes).
+        redirect: Home page if the request method is POST and the registration is successful.
+        redirect: Registration page with an error flash message if a user already exists.
+        redirect: Registration page with an error flash message if the passwords do not match.
+        redirect: If the security question answer is invalid, redirect to a YouTube link.
         render_template: If the request method is not POST, render the registration template.
     """
     if current_user.is_authenticated:
