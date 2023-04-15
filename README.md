@@ -19,7 +19,7 @@ During my student years, we(me and my group) had a lot of fun with two people, a
 <img src="images/example.png" width="600" height="320"/>
 
 ## License
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+This project is licensed under the [GNU General Public License v3.0](https://github.com/molfaryura/flask-app/blob/main/LICENSE).
 
 ## Contact
 If you have any questions, comments, or suggestions, please feel free to contact me at oleksandrr1996@protonmail.com
